@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en" >
+<head>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <meta charset="utf-8">
+
+
+
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+    <title>jelivebien, site de petites annonces gratuites sur le bien-être </title>
+
+
+
+</head>
+
+<body>
+
+<nav class="navbar py-0" style="background-color: lavender;">
+    <div class="container-fluid justify-content-start">
+        <a class=" col-lg-6 col-sm-8" href="/home">
+            <img th:src="@{/img/logo1.svg}" alt="" width="50%" height="auto">
+
+        </a>
+
+    </div>
+</nav>
+
+<a th:href="@{/list_users_paiement}" class="btn btn-secondary">Check list of users paiements</a>
+
+<h1> LIST OF USERS</h1>
+<table class="table table-striped table-bordered">
+    <thead class="thead-dark">
+    <tr>
+        <th>User ID</th>
+        <th>E-mail</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Roles</th>
+        <th></th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="user: ${listUsers}">
+        <td th:text="${user.id}">User ID</td>
+        <td th:text="${user.email}">E-mail</td>
+        <td th:text="${user.firstName}">First Name</td>
+        <td th:text="${user.lastName}">Last Name</td>
+       <td th:each="role: ${user.roles}">
+           <a th:text="${role.name}"></a>
+           </td>
+        <td><a th:href="@{/users/edit/{id}(id=${user.id})}">Edit</a></td>
+    </tr>
+    </tbody>
+</table>
+
+
+<script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+<div th:insert="footer :: copy"></div>
+</body>
+</html>

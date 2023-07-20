@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org" lang="en" >
+<head>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <meta charset="utf-8">
+
+
+
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}">
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/6.1.1/css/all.min.css}"/>
+
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+    <title>jelivebien add post, site de petites annonces gratuites sur le bien-être </title>
+
+
+</head>
+
+<body>
+
+<nav class="navbar py-0" style="background-color: lavender;">
+    <div class="container-fluid justify-content-start">
+        <a class=" col-lg-6 col-sm-8" href="/home">
+            <img th:src="@{/img/logo1.svg}" alt="" width="50%" height="60px">
+
+        </a>
+
+    </div>
+</nav>
+
+
+<!--<div class="container text-center">
+    <h3>Vous vous êtes inscrit avec succès ! <span style='font-size:20px;'>&#128525;</span></h3>
+    <h4><a th:href="@{/login}" class="btn btn-primary btn-sm">Cliquez ici pour vous connecter</a></h4>
+</div>-->
+
+<div class="container text-center">
+    <h3>Vous vous êtes inscrit avec succès ! <span style='font-size:20px;'>&#128525;</span></h3>
+
+    <h2>Veuillez vérifier votre e-mail pour vérifier votre compte. Merci</h2>
+
+</div>
+
+<script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+
+<div th:insert="footer :: copy"></div>
+</body>
+</html>

@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org" lang="en" >
+<head>
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="Site Nº1 des annonces de massage et bien-être,les meilleurs masseurs,les meilleures masseuses,
+   Massage et  bien-être au Cameroun,annonces Massages - Service Massage, annonces adultes, Cameroun, Publier une annonce Cameroun
+       ,yamo,belle vie, soins">
+    <meta name="keywords" content="Massage, bien-être, Cameroun,pierres chaudes,Douala, Yaounde,
+                        Massage californien, Massage londonien,Massage thailandais
+                        Massage corps à corps, Massage sensuel,Massage sportif ,réfléxologie
+                        Soin du visage, de la peau, SPA
+                        Épilation, manucure et pédicure,
+                        Huiles essentielles et Vitamines
+                        diététique, Grossir ou Maigrir
+                        Coach sentimental - love coach
+                        détente, masseur, masser, stress
+                        dos, nuque,hammam,circulation sanguine,
+                        massothérapie,kinésithérapeute,massothérapeute,
+                        sensualité,annonces, Massages, Service, Massage,
+                        adultes, Cameroun, Publier, annonce, Cameroun">
+  <meta charset="utf-8">
+
+  <!-- Favicon -->
+  <link href="img/favicon.ico" rel="icon">
+
+
+  <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css} "/>
+  <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}">
+
+    <title>jelivebien Registration, site de petites annonces gratuites sur le bien-être </title>
+
+
+</head>
+
+<body>
+
+<nav class="navbar navbar-light">
+    <div class="container-fluid justify-content-start ju">
+        <a class="navbar-brand  col-lg-6 col-sm-8" href="/">
+            <img th:src="@{/img/logo.svg}" alt="" width="50%" height="auto">
+
+        </a>
+
+    </div>
+</nav>
+
+
+<!-- handle if the username or password is wrong -->
+<div class="container" style="text-align: center" th:if="${param.error}">
+  <p class="text-danger">
+    Invalid email or password
+  </p>
+</div>
+
+
+<!-- login-->
+<div class="container mt-3">
+    <h2 style="text-align: center">Se connecter</h2>
+    <form th:action="@{/login}" method="post" style="max-width: 350px; margin: 0 auto">
+        <div class="mb-3 mt-3">
+            <label for="email">Email:</label>
+            <input type="email" class="form-control" id="email" placeholder="Entrer votre email" required name="email">
+            <div class="valid-feedback" style="font-size: small">Valide.</div>
+            <div class="invalid-feedback" style="font-size: small">Veuillez remplir ce champ.</div>
+        </div>
+        <div class="mb-3">
+            <label for="pwd">Mot de passe:</label>
+            <input type="password" class="form-control" id="pwd" minlength="4" placeholder="Entrer votre mot de passe" name="password" required>
+            <div class="valid-feedback" style="font-size: small">Valide.</div>
+            <div class="invalid-feedback" style="font-size: small">Veuillez remplir ce champ.</div>
+        </div>
+
+        <div style="padding-bottom:10px">
+            <a th:href="@{/forgot_password}">Mot de passe oublié ?</a>
+        </div>
+
+        <button type="submit" class="btn btn-primary">
+            Se connecter
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+            </svg>
+        </button>
+
+        <hr>
+        <a th:href="@{/register}" class="btn btn-sm btn-secondary" type="button">
+            Je veux m'inscrire
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+            </svg>
+        </a>
+    </form>
+
+
+
+</div>
+
+
+
+
+
+</body>
+</html>

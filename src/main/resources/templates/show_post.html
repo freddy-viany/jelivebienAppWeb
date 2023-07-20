@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="Site Nº1 des annonces de massage et bien-être,les meilleurs masseurs,les meilleures masseuses,
+   Massage et  bien-être au Cameroun,annonces Massages - Service Massage, annonces adultes, Cameroun, Publier une annonce Cameroun
+       ,yamo,belle vie, soins">
+    <meta name="keywords" content="Massage, bien-être, Cameroun,pierres chaudes,Douala, Yaounde,
+                        Massage californien, Massage londonien,Massage thailandais
+                        Massage corps à corps, Massage sensuel,Massage sportif ,réfléxologie
+                        Soin du visage, de la peau, SPA
+                        Épilation, manucure et pédicure,
+                        Huiles essentielles et Vitamines
+                        diététique, Grossir ou Maigrir
+                        Coach sentimental - love coach
+                        détente, masseur, masser, stress
+                        dos, nuque,hammam,circulation sanguine,
+                        massothérapie,kinésithérapeute,massothérapeute,
+                        sensualité,annonces, Massages, Service, Massage,
+                        adultes, Cameroun, Publier, annonce, Cameroun">
+    <meta charset="utf-8">
+
+
+
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}">
+    <link th:rel="stylesheet" th:href="@{/webjars/jquery/3.6.0/jquery.js}">
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/6.1.1/css/all.min.css}"/>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+
+    <!--<style th:rel="stylesheet" th:href="@{../static/css/post_display.css}"></style>
+    <script type="text/javascript" th:href="@{../static/js/post_display.js}"></script>-->
+
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js" integrity="sha384-7+zCNj/IqJ95wo16oMtfsKbZ9ccEh31eOz1HGyDuCQ6wgnyJNSYdrPa03rtR1zdB" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.min.js" integrity="sha384-QJHtvGhmr9XOIpI6YVutG+2QOK9T+ZnN4kzFN1RtK3zEFEIsxhlmWl5/YESvpZ13" crossorigin="anonymous"></script>
+
+    <!-- test slider -->
+    <!--    <link rel="stylesheet" th:href="@{/css/post_display.css}">-->
+
+    <!-- end test -->
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+    <title>jelivebien add post, site de petites annonces gratuites sur le bien-être </title>
+
+
+</head>
+
+<body>
+
+<div th:insert="header :: copy-header"></div>
+
+
+<div class="container">
+
+
+    <div class="row justify-content-center">
+        <div class="col-lg-6 col-sm-12">
+            <div  th:if="${not #lists.isEmpty(filePostConvert)}"  class="card-body" >
+                <!--               <img id="main-image" src="https://i.imgur.com/Dhebu4F.jpg" width="250"/>-->
+
+
+                <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+                    <div class="carousel-inner">
+
+                        <div class="ratio ratio-1x1 carousel-item active">
+                            <img class="d-block w-100" th:if="${post.imageBase64 !=''}" th:src="@{'data:image/jpeg;base64,'+${filePostConvert1}}" alt="First slide">
+                            <img class="d-block w-100" th:if="${post.imageBase64 ==''}" th:src="@{/img/no_post_image.png}" alt="First slide">
+
+                        </div>
+
+                        <div class="ratio ratio-1x1  carousel-item" th:each="photo : ${filePostConvert}" th:if="${post.imageBase64 !=''}">
+                            <img class="d-block w-100" th:src="@{'data:image/jpeg;base64,'+${photo}}" alt="Second slide">
+                        </div>
+
+                    </div>
+                    <button class="carousel-control-prev btn-danger btn-sm" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
+                        <span class="btn btn-danger carousel-control-prev-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Previous</span>
+                    </button>
+                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
+                        <span class="btn btn-danger carousel-control-next-icon" aria-hidden="true"></span>
+                        <span class="visually-hidden">Next</span>
+                    </button>
+                </div>
+
+
+            </div>
+            <!-- image empty -->
+            <div  th:if="${#lists.isEmpty(filePostConvert)}"  class="card-body" >
+                <!--               <img id="main-image" src="https://i.imgur.com/Dhebu4F.jpg" width="250"/>-->
+
+
+                <div id="" class="carousel slide" >
+
+                    <div class=" ">
+                        <img th:if="${post.imageBase64 ==''}" th:src="@{/img/no_post_image.png}"  class="card-img-top"  alt="...">
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+        <div class="col">
+            <p>
+            <hr/>
+            <h4 th:if="${post.status.name() =='VIP'}">Annonce <span class="badge bg-secondary">[[${post.status.name()}]]</span></h4>
+            <h4 th:if="${post.status.name() =='PREMIUM'}">Annonce <span class="badge bg-secondary">[[${post.status.name()}]]</span></h4>
+            <h4 th:if="${post.status.name() =='STANDARD'}">Annonce <span class="badge bg-secondary">RELAXE</span></h4>
+            <h4 th:if="${post.postCertifie ==true}"><span class="badge bg-danger">Certifié</span></h4>
+            <hr/>
+            </p>
+            <div class="" style="text-align: justify">
+                <p class="label text-primary fw-bold "><i class="fa-solid fa-right-from-bracket"></i> [[${post.postTitle}]]</p>
+            </div>
+            <p class="">
+                <i class="material-icons" style="font-size:20px">domain</i>
+                Ville : <i class="fw-bold text-Secondary"></i> [[${post.postCity}]]</p>
+
+            <p > <i style="font-size:11px">Plublié par:</i> <i class="material-icons" style="font-size:20px">perm_identity</i>  <i class="text-danger">[[${post.user.civility}]] [[${post.user.firstName}]] [[${post.user.lastName}]]</i></p>
+
+            <p class=""> <i class="fa-solid fa-circle-arrow-right"></i> [[${post.postCategory}]]</p>
+            <div class="justify-content-center">
+                <span class="badge bg-secondary" th:text="${post.postMoveSituation}"></span>
+            </div>
+
+            <hr/>
+
+                <i class="fa-solid fa-asterisk"></i><i class="text-danger badge">Détails :</i>
+            <hr/>
+
+            <div class="justify-content-center">
+                <p class="label" th:text="${post.postDescription}"></p>
+            </div>
+
+            <p class="" style="font-size:12px">Reference: <i>U [[${post.user.id}]] </i> <i>A</i><i>[[${post.postID}]]</i><i>X</i></p>
+
+            <p >  <span class="material-icons" style="font-size:20px">watch</span>Publié:
+                <small th:if="${timeFormatOfPublishedPost !=''}" class="text-muted" > [[${timeFormatOfPublishedPost}]] </small>
+
+                <small th:if="${timeFormatOfPublishedPost ==''}" class="text-muted" th:text="${#temporals.format(post.creationPostDateTime, 'dd-MMM-yyyy HH:mm')}"></small>
+            </p>
+
+            <div style="fontSize: '12px'">
+                <p><span class="material-icons">call</span> Voir le numero :
+                    <button  type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal1">
+                        6********
+                    </button>
+                </p>
+                <!-- Button trigger modal -->
+                <!--<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    6********
+                </button>-->
+
+
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Contacts:</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div>
+                                <h5></h5>
+                            </div>
+                            <div class="modal-body">
+                                <p>Cliquer pour WhatsApper <a th:href="@{'https://wa.me/'+${post.postPhoneNumber}+'/?text='+${encodeURL}}"><i class="fa-brands fa-whatsapp text-success"></i></a> <a  th:href="@{'https://wa.me/'+${post.postPhoneNumber}+'/?text='+${encodeURL}}" type="button" class="btn btn-success">[[${post.postPhoneNumber}]]</a>   </p>
+                                <p>Appel Normal <a th:href="@{'tel:'+${post.postPhoneNumber}}"> <i class="material-icons text-secondary" style="font-size: 30px">call</i></a> <a  th:href="@{'tel:'+${post.postPhoneNumber}}" type="button" class="btn btn-secondary btn-sm">[[${post.postPhoneNumber}]]</a>   </p>
+                                <p>Envoyer un SMS <a th:href="@{'sms:'+${post.postPhoneNumber}+'?body='+${encodeURL}}"> <i class="material-icons text-secondary" style="font-size: 30px">chat</i></a> <a  th:href="@{'sms:'+${post.postPhoneNumber}+'?body='+${encodeURL}}" type="button" class="btn btn-secondary btn-sm">[[${post.postPhoneNumber}]]</a>   </p>
+                                <p></p>
+                                <p class="text-danger"><span class="material-icons">warning</span> Évitez les escroqueries</p>
+                                <p class="text-primary">Si vous acceptez des rendez-vous, rendez-vous uniquement dans des lieux publics et fréquentés.</p>
+                                <p class="text-primary">Si le compte n'est pas certifié, ne payez pas le service à l'avance. </p>
+                                <p class="text-primary">Dénoncez toute annonce avec des preuves si vous êtes victime d'une arnaque.</p>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- end modal -->
+            </div>
+            <hr>
+            <div class="alert-light">
+                <i class="fa-solid fa-eye"></i> <strong><i class="text-danger"> [[${post.postViewCount}]] </i></strong> personnes ont vu l'annonce.
+            </div>
+            <hr>
+            <div>
+                <i class="fa-solid fa-circle-arrow-right"></i>
+                <i class="fa-brands fa-whatsapp text-danger"></i><a  th:href="@{'https://wa.me/620198571/?text=Infoline . Annonce A' + ${post.postID} + '-Comment pouvons-nous vous aidez?'}"  class="btn btn-danger btn-sm"> Je dénonce via Whatsapp</a>
+
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5">
+    <div class="alert alert-info text-center m-0" role="alert">
+        jelivebien.com n'est pas responsable des produits ou services proposés dans les annonces et aucunement responsable des actions des utilisateurs.
+    </div>
+</div>
+
+<div th:insert="footer :: copy"></div>
+
+
+<!--<script src='https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='https://ajax.googleapis.com/ajax/libs/jqueryui/1.11.2/jquery-ui.min.js'></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.6.0/underscore.js'></script>
+<script type="text/javascript" th:src="@{/js/post_display.js}"></script>-->
+</body>
+</html>

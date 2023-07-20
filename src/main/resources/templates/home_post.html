@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" >
+<head>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="Site Nº1 des annonces de massage et bien-être,les meilleurs masseurs,les meilleures masseuses,
+   Massage et  bien-être au Cameroun,annonces Massages - Service Massage, annonces adultes, Cameroun, Publier une annonce Cameroun
+       ,yamo,belle vie, soins">
+    <meta name="keywords" content="Massage, bien-être, Cameroun,pierres chaudes,Douala, Yaounde,
+                        Massage californien, Massage londonien,Massage thailandais
+                        Massage corps à corps, Massage sensuel,Massage sportif ,réfléxologie
+                        Soin du visage, de la peau, SPA
+                        Épilation, manucure et pédicure,
+                        Huiles essentielles et Vitamines
+                        diététique, Grossir ou Maigrir
+                        Coach sentimental - love coach
+                        détente, masseur, masser, stress
+                        dos, nuque,hammam,circulation sanguine,
+                        massothérapie,kinésithérapeute,massothérapeute,
+                        sensualité,annonces, Massages, Service, Massage,
+                        adultes, Cameroun, Publier, annonce, Cameroun">
+    <meta charset="utf-8">
+
+    <!-- Favicon -->
+    <link th:href="@{/favicon.ico}" rel="icon">
+
+
+
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}">
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/6.1.1/css/all.min.css}"/>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+
+
+
+    <title>jelivebien, site de petites annonces gratuites sur le bien-etre</title>
+
+</head>
+
+<body>
+
+<div th:insert="header :: copy-header"></div>
+
+<div class="container p-1">
+    <form action="" th:action="@{/posts/search}" method="post" th:object="${post}">
+        <div class="row" >
+            <div class="col-md-4">
+                <label for="searchSentence" class="form-label" style="color: goldenrod">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-file-earmark-font" viewBox="0 0 16 16">
+                        <path d="M10.943 6H5.057L5 8h.5c.18-1.096.356-1.192 1.694-1.235l.293-.01v5.09c0 .47-.1.582-.898.655v.5H9.41v-.5c-.803-.073-.903-.184-.903-.654V6.755l.298.01c1.338.043 1.514.14 1.694 1.235h.5l-.057-2z"/>
+                        <path d="M14 4.5V14a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V2a2 2 0 0 1 2-2h5.5L14 4.5zm-3 0A1.5 1.5 0 0 1 9.5 3V1H4a1 1 0 0 0-1 1v12a1 1 0 0 0 1 1h8a1 1 0 0 0 1-1V4.5h-2z"/>
+                    </svg>
+                    mots clés...</label>
+                <input type="text" class="form-control" id="searchSentence" name="searchSentence" placeholder="Que cherchez vous?">
+            </div>
+            <div class="col-md-3">
+                <label  class="form-label" style="color: goldenrod">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-building-fill" viewBox="0 0 16 16">
+                        <path d="M3 0a1 1 0 0 0-1 1v14a1 1 0 0 0 1 1h3v-3.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 .5.5V16h3a1 1 0 0 0 1-1V1a1 1 0 0 0-1-1H3Zm1 2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3 0a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5ZM4 5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM7.5 5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1ZM4.5 8h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5Zm2.5.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1Zm3.5-.5h1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-1a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5Z"/>
+                    </svg>
+                    Ville
+                </label>
+                <select  class="form-select" th:field="*{postCity}" name="citySearch" >
+                    <option value="0">Tout le Cameroun</option>
+                    <option  th:each="city:${listPostCities}"  th:value="${city}" th:text="${city}" ></option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <label for="inputCat" class="form-label" style="color: goldenrod">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-circle-fill" viewBox="0 0 16 16">
+                        <path d="M16 8A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM8.5 4.5a.5.5 0 0 0-1 0v3h-3a.5.5 0 0 0 0 1h3v3a.5.5 0 0 0 1 0v-3h3a.5.5 0 0 0 0-1h-3v-3z"/>
+                    </svg>
+                    Categorie
+                </label>
+                <select id="inputCat" class="form-select" th:field="*{postCategory}" name="categorySearch">
+                    <option value="0">Toutes les categories</option>
+                    <option th:each="category:${listPostCategories}"  th:value="${category}" th:text="${category}"></option>
+                </select>
+            </div>
+            <div class="col-md-2">
+                <label  class="form-label" style="color: goldenrod">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search-heart" viewBox="0 0 16 16">
+                        <path d="M6.5 4.482c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018Z"></path>
+                        <path d="M13 6.5a6.471 6.471 0 0 1-1.258 3.844c.04.03.078.062.115.098l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1.007 1.007 0 0 1-.1-.115h.002A6.5 6.5 0 1 1 13 6.5ZM6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z"></path>
+                    </svg>
+
+                </label>
+                <button type="submit" class="form-control btn btn-danger" name="search" id="search">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search-heart" viewBox="0 0 16 16">
+                        <path d="M6.5 4.482c1.664-1.673 5.825 1.254 0 5.018-5.825-3.764-1.664-6.69 0-5.018Z"></path>
+                        <path d="M13 6.5a6.471 6.471 0 0 1-1.258 3.844c.04.03.078.062.115.098l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1.007 1.007 0 0 1-.1-.115h.002A6.5 6.5 0 1 1 13 6.5ZM6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11Z"></path>
+                    </svg>
+                    Rechercher
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<div class="container-fluid p-2 bg-primary text-white text-center">
+    <h1>Je live bien</h1>
+    <p>Le stress fait partie de la vie. On peut le diminuer, mais il est impossible de l’éliminer. Alors il est utile d’apprendre à bien le gérer.</p>
+</div>
+
+<div class="container-fluid text-center" style="margin: 20px">
+    <!-- Button for voir les annonces and poster une annonce -->
+   <!-- <a type="button" href="/addpost" class="btn btn-primary" style="margin: 8px">Poster une annonces</a>-->
+
+    <a th:if="${user.subscribe==true}"  th:href="@{/addpost}" class="btn btn-sm btn-primary p-2" type="button">
+        Publier une annonce</a>
+
+    <a th:if="${user.subscribe==false}" th:href="@{/userpanel}" class="btn btn-sm btn-primary p-2" type="button">
+        Publier une annonce</a>
+
+
+    <a type="button" href="/posts" class="btn btn-success" style="margin: 8px">Voir les annonces</a>
+    <!-- en button -->
+</div>
+<!-- Carousel -->
+
+<div class="row">
+    <div class="card">
+        <div class="row">
+            <div id="carouselExampleIndicators" class="carousel slide col-md-8 col-sm-12" data-bs-ride="carousel">
+                <div class="carousel-indicators">
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1" aria-label="Slide 2"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2" aria-label="Slide 3"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3" aria-label="Slide 4"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="4" aria-label="Slide 5"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="5" aria-label="Slide 6"></button>
+                    <button type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide-to="6" aria-label="Slide 7"></button>
+
+                </div>
+                <div class="carousel-inner">
+                    <div class="carousel-item active">
+                        <img th:src="@{/img/home2.webp}" class="d-block  img-fluid" alt="..." style="width: 100%;height:  60vh">
+                    </div>
+                    <div class="carousel-item">
+                        <img th:src="@{/img/home4.jpg}" class="d-block  img-fluid" alt="..." style="width: 100%;height: 60vh">
+                    </div>
+                    <div class="carousel-item">
+                        <img th:src="@{/img/home3.jpeg}" class="d-block  img-fluid" alt="..." style="width: 100%;height: 60vh">
+                    </div>
+                    <div class="carousel-item">
+                        <img th:src="@{/img/home10.jpg}" class="d-block  img-fluid" alt="..." style="width: 100%;height: 60vh">
+                    </div>
+                    <div class="carousel-item">
+                        <img th:src="@{/img/home7.jpg}" class="d-block  img-fluid" alt="..." style="width: 100%;height: 60vh">
+                    </div>
+
+                    <div class="carousel-item">
+                        <img th:src="@{/img/home8.jpg}" class="d-block  img-fluid" alt="..." style="width: 100%;height: 60vh">
+                    </div>
+                    <div class="carousel-item">
+                        <img th:src="@{/img/home9.jpg}" class="d-block  img-fluid" alt="..." style="width: 100%;height: 60vh">
+                    </div>
+
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Previous</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleIndicators" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Next</span>
+                </button>
+            </div>
+
+            <div class=" col-md-4 col-sm-12 ml-1 card border-danger">
+                <div class="card-header">
+                    C'est quoi le bien-être?
+                </div>
+                <div class="card-body">
+                    <blockquote class="blockquote mb-0">
+                        <p>Sensation agréable procurée par la satisfaction de besoins physiques, l'absence de soucis..</p>
+                        <footer class="blockquote-footer">Disposition agréable du corps et de l'esprit.</footer>
+                        <p><a href="/home" class="btn btn-sm btn-primary"> Voir les annonces </a></p>
+
+                        <!--<p><a  th:href="@{/addpost}" class="btn btn-sm btn-primary p-2" type="button">
+                            Publier une annonce</a></p>-->
+
+                        <p>
+                            <a th:if="${user.subscribe==false}" th:href="@{/userpanel}" class="btn btn-sm btn-primary p-2" type="button">
+                                Publier une annonce</a>
+                        </p>
+                        <p>
+
+                            <a th:if="${user.subscribe==true}" th:href="@{/addpost}" class="btn btn-sm btn-primary p-2" type="button">
+                                Publier une annonce</a>
+                        </p>
+
+                    </blockquote>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!--End Carousel -->
+
+
+
+
+
+<script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+
+<div th:insert="footer :: copy"></div>
+</body>
+</html>

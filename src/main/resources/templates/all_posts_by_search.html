@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en" >
+<head>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta name="description" content="Site Nº1 des annonces de massage et bien-être,les meilleurs masseurs,les meilleures masseuses,
+   Massage et  bien-être au Cameroun,annonces Massages - Service Massage, annonces adultes, Cameroun, Publier une annonce Cameroun
+       ,yamo,belle vie, soins">
+    <meta name="keywords" content="Massage, bien-être, Cameroun,pierres chaudes,Douala, Yaounde,
+                        Massage californien, Massage londonien,Massage thailandais
+                        Massage corps à corps, Massage sensuel,Massage sportif ,réfléxologie
+                        Soin du visage, de la peau, SPA
+                        Épilation, manucure et pédicure,
+                        Huiles essentielles et Vitamines
+                        diététique, Grossir ou Maigrir
+                        Coach sentimental - love coach
+                        détente, masseur, masser, stress
+                        dos, nuque,hammam,circulation sanguine,
+                        massothérapie,kinésithérapeute,massothérapeute,
+                        sensualité,annonces, Massages, Service, Massage,
+                        adultes, Cameroun, Publier, annonce, Cameroun">
+    <meta charset="utf-8">
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}">
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+
+
+    <title>jelivebien, site de petites annonces gratuites sur le bien-être </title>
+
+</head>
+
+<body>
+
+<div th:insert="header :: copy-header"></div>
+
+
+<div class="container mt-3 ">
+<div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" th:if="${#lists.size(postPage) !=0}" th:each="post:${postPage}">
+
+        <div class="card h-100 border border-primary" >
+           <!-- <img  th:src="@{'data:image/jpeg;base64,'+${post.imageContent}}" class="card-img-top" alt="..."> -->
+            <div class="img-fluid" style="display: flex;width: auto;height: 150px">
+                <span class="badge rounded-pill bg-danger" th:if="${post.status.name() =='VIP'}" th:text="${post.status.name()}"
+                      style="position: absolute;top:10px;background:red;
+                       text-align: center;border-radius: 30px 30px 30px 30px;
+                       color:white;padding:5px 10px;font-size:15px;"></span>
+                <span class="badge rounded-pill bg-success" th:if="${post.status.name() =='PREMIUM'}" th:text="${post.status.name()}"
+                style="position: absolute;top:10px;background:red;
+                       text-align: center;border-radius: 30px 30px 30px 30px;
+                       color:white;padding:5px 10px;font-size:9px;"></span>
+
+                <span class="badge rounded-pill bg-secondary" th:if="${post.status.name() =='STANDARD'}" th:text="RELAXE"
+                      style="position: absolute;top:10px;background:red;
+                       text-align: center;border-radius: 30px 30px 30px 30px;
+                       color:white;padding:5px 10px;font-size:9px;"></span>
+
+
+                <span class="badge rounded-pill bg-danger" th:if="${post.postCertifie ==true}"
+                      style="position: absolute;top:10px;background:#ef9c0a;
+                       text-align: center;border-radius: 30px 30px 30px 30px;
+                       color:white;padding:5px 10px;font-size:15px; margin-left: 248px">Certifié</span>
+                <img th:if="${post.imageBase64 !=''}" th:src="@{'data:image/jpeg;base64,'+${post.imageBase64}}" th:href="@{/show-posts/{postID}(postID=${post.postID})}" class="card-img-top"  alt="...">
+                <img th:if="${post.imageBase64 ==''}" th:src="@{/img/no_post_image.png}" class="card-img-top" th:href="@{/show-posts/{postID}(postID=${post.postID})}" alt="...">
+            </div>
+
+
+            <div class="card-body">
+                <h6 class="card-title text-primary fw-bold " th:text="${post.postTitle}" style="text-align: justify;font-family: 'Roboto', sans-serif;"></h6>
+                <p class="" style="font-size:14px">
+                    <i class="material-icons" style="font-size:20px">domain</i>
+                      <i class="fw-bold text-Secondary"></i> <b th:text="${post.postCity}"></b>,Cameroun</p>
+
+                <p class=""  style="font-size: 14px"><span class="badge bg-danger" >[[${post.postCategory}]] </span></p>
+                <p>
+                    <a th:href="@{/show-posts/{postID}(postID=${post.postID})}" class="btn btn-primary" style="font-size: 12px">voir plus</a>
+                </p>
+
+                <hr> <!-- footer card -->
+                <small th:each="entry,iterStat:${dateTimeList}"  th:if="${entry.key==post.PostID}" >
+                    Posté :   <i class="text-success p-2" th:text="${entry.value}"></i>  </small>
+
+               <span class="badge rounded-pill bg-danger fw-bold " th:if="${post.status.name() =='VIP'}"
+                      th:text="${post.status.name()}"></span>
+                <span class="badge rounded-pill bg-success" style="font-size:9px;" th:if="${post.status.name() =='PREMIUM'}"
+                      th:text="${post.status.name()}"></span>
+                <span class="badge rounded-pill bg-secondary" style="font-size:9px;" th:if="${post.status.name() =='STANDARD'}"
+                      th:text="RELAXE"></span>
+                <!-- end footer card -->
+
+            </div>
+
+        </div>
+
+
+
+    </div>
+
+    <div th:if="${#lists.isEmpty(postPage)}" class="col">
+        Oups ... Nous n'avons pas trouvé votre page.
+        Aucune annonce ne correspond à votre recherche
+        Veuillez faire une autre recherche.
+
+        <div class="container-fluid text-center" style="margin: 20px">
+            <!-- Button for voir les annonces and poster une annonce -->
+            <a th:if="${user.subscribe==false}"
+               class="btn btn-sm btn-primary p-2" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                Publier une annonce</a>
+
+
+
+            <!-- Modal -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLabel">Oups !!!!:</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div>
+                            <h5></h5>
+                        </div>
+                        <div class="modal-body">
+                            <p class="text-secondary">Veuillez sponsoriser vos annonces avant de les publier. </p>
+                            <a class="text-primary" th:href="@{/addpost}"> <i class="fa-solid fa-arrow-pointer"></i> cliquez ici pour sponsoriser!</a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+
+
+            <a th:if="${user.subscribe==true}" th:href="@{/addpost}" class="btn btn-sm btn-primary p-2" type="button">
+                Publier une annonce</a>
+
+
+            <a type="button" href="/" class="btn btn-success" style="margin: 8px">Voir les annonces</a>
+            <!-- en button -->
+        </div>
+    </div>
+
+
+</div>
+</div>
+
+<div th:if="${not #lists.isEmpty(postPage)}" class="container mt-5">
+    <!--  pagination section -->
+    <div th:if="${totalPages} > 1">
+        <div class="row col-sm-10">
+            <div class="col-sm-5">
+                Nombre d'annonces trouvées : <label type="button" class="btn btn-outline-info">[[${totalItems}]]</label>
+
+            </div>
+
+
+            <div class="col-sm-1 p-1 pagination" th:if="${currentPage>1}">
+
+                <a th:if="${currentPage < totalPages}" th:href="@{'/posts/page/'+${currentPage-1} +
+                '?searchSentence='+${searchSentence}+'&postCity='+${citySearch}+'&postCategory='+${categorySearch}}">
+                    <button class="btn btn-primary">Prev</button>
+                </a>
+
+            </div>
+
+
+            <div class="col-sm-1 p-1 pagination">
+                <a th:if="${currentPage < totalPages }" th:href="@{'/posts/search/page/' +${currentPage +1}+
+                '?searchSentence='+${searchSentence}+'&postCity='+${citySearch}+'&postCategory='+${categorySearch}}">
+                    <button class="btn btn-primary">Next</button>
+                </a>
+                <span th:unless="${currentPage < totalPages}">
+                    <button class="btn btn-primary">Next</button>
+                </span>
+            </div> &nbsp;&nbsp;&nbsp;&nbsp;
+
+          
+
+
+        </div>
+    </div>
+</div>
+
+<div class="container mt-5 ">
+    <div class="card">
+        <div class="card-body">
+            <div class="row">
+                <th:block th:each="post:${postList}">
+                    <div class="col-sm-3">
+
+                    </div>
+                </th:block>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class="container mt-5">
+    <div class="alert alert-info text-center m-0" role="alert">
+        jelivebien.com n'est pas responsable des produits ou services proposés dans les annonces et aucunement responsable des actions des utilisateurs.
+    </div>
+</div>
+
+
+<!--<div class="container mt-5">
+    <div class="row">
+        <div class="col-sm-4">
+            <h3>Verite 1</h3>
+            <p>Le fruit de l'humilité, de la crainte de l'Eternel,</p>
+            <p>c'est la richesse, la gloire et la vie.<i class="text-success">Proverbes 22:4</i></p>
+        </div>
+        <div class="col-sm-4">
+            <h3>Verite 2</h3>
+            <p>Mais par-dessus tout cela, revêtez-vous de l'amour, qui est le lien de la perfection.</p>
+            <p><i class="text-success">Colossiens 3:14</i> </p>
+        </div>
+        <div class="col-sm-4">
+            <h3>Verite 3</h3>
+            <p>Car Dieu a tant aimé le monde qu'il a donné son Fils unique, <p>
+            <p>afin que quiconque croit en lui ne périsse point, mais qu'il ait la vie éternelle</p>
+            <p><i class="text-success"> Jean 3:16</i></p>
+        </div>
+    </div>
+</div>-->
+
+
+<script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+
+<div th:insert="footer :: copy"></div>
+</body>
+</html>

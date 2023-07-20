@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org" lang="en" >
+<head>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <meta charset="utf-8">
+
+
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}">
+    <link th:rel="stylesheet" th:href="@{/webjars/font-awesome/6.1.1/css/all.min.css}"/>
+
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
+          rel="stylesheet">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+    <title>jelivebien User panel, site de petites annonces gratuites sur le bien-être </title>
+
+
+
+</head>
+
+<body>
+
+<nav class="navbar py-0" style="background-color: lavender;">
+    <div class="container-fluid justify-content-start ju">
+        <a class="col-lg-6 col-sm-8" href="/">
+            <img th:src="@{/img/logo1.svg}" alt="" width="50%" height="60px">
+
+        </a>
+
+
+
+        <a th:if="${user.subscribe==false}"
+           class="btn btn-sm btn-primary p-2 py-0" type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">
+            Publier une annonce
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+            </svg>
+        </a>
+
+
+
+        <!-- Modal -->
+        <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Oups !!!!: Vos annonces gratuites sont finies.</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div>
+                        <h5></h5>
+                    </div>
+                    <div class="modal-body">
+                       <p class="text-secondary">Veuillez vous abonner avant de publier vos annonces.</p>
+                        <a class="text-primary" > <i class="fa-solid fa-arrow-pointer"></i> choisissez la formule qui vous convient et abonnez vous!</a>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+
+        <a th:if="${user.subscribe==true}" th:href="@{/addpost}" class="btn btn-sm btn-primary p-2 py-0" type="button">
+            Publier une annonce
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right-circle" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M1 8a7 7 0 1 0 14 0A7 7 0 0 0 1 8zm15 0A8 8 0 1 1 0 8a8 8 0 0 1 16 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z"/>
+            </svg>
+        </a>
+
+
+        <form th:action="@{/appLogout}" method="POST">
+
+            <input class="btn btn-sm btn-danger p-2 m-3 py-0" type="submit" value="Se deconnecter"/>
+        </form>
+
+
+    </div>
+</nav>
+<div class="alert alert-primary" role="alert" th:text="${messagePaiement}" th:if="${messagePaiement}"></div>
+
+
+    <nav class="navbar navbar-light bg-light" style="background-color: #e3f2fd;">
+        <form class="container-fluid justify-content-start">
+            <a th:if="${roleAdminFound==true}" th:href="@{/admin}" class="btn btn-outline-danger me-2 py-0" type="button">Admin section</a>
+            <a th:if="${roleManagerFound==true}" th:href="@{/manager}" class="btn btn-outline-info me-2 py-0" type="button">Manager section</a>
+            <a class="btn btn-outline-success me-2" type="button">Mon profil</a>
+            <a th:href="@{/user/{id}/posts(id=${user.id})}" class="btn btn-sm btn-info" type="button">Mes Annonces</a>
+            <a th:href="@{/home}" class="btn btn-sm btn-success m-1" type="button">Toutes les Annonces</a>
+
+
+            <label class="me-2 fw-bold p-1" th:if="${user.typeAccount.name()=='STANDARD'}" style="display: none"> </label>
+
+            <label class="me-2 fw-bold p-1" th:if="${user.typeAccount.name()=='VIP'}" >Date de fin d'abonnement :
+                <i class="btn-outline-danger" th:text="${#temporals.format(user.expireSubscribeDate, 'dd-MMM-yyyy HH:mm')}"></i> </label>
+
+            <label class="me-2 fw-bold p-1" th:if="${user.typeAccount.name()=='PREMIUM'}" >Date de fin d'abonnement :
+                <i class="btn-outline-danger" th:text="${#temporals.format(user.expireSubscribeDate, 'dd-MMM-yyyy HH:mm')}"></i> </label>
+
+            <label class="me-2 fw-bold p-1" th:if="${user.typeAccount.name()=='STANDARD'}" >Date de fin d'abonnement :
+                <i class="btn-outline-danger" th:text="${#temporals.format(user.expireSubscribeDate, 'dd-MMM-yyyy HH:mm')}"></i> </label>
+
+        </form>
+    </nav>
+<div class="container p-1">
+
+    <h6>Ton package d'annonces sponsorisées : <span class="badge bg-secondary">[[${user.numberPostPermits}]] </span></h6>
+
+
+    <h6 th:if="${user.subscribe==false}">Salut <h7 class="text-primary"> [[${user.firstName}]] </h7><h8 class="text-success"> , abonne-toi maintenant!</h8></h6>
+    <h6 th:if="${user.subscribe==true}">Salut <h7 class="text-primary"> [[${user.firstName}]] </h7>, ton abonnement actuel est <h7 class="text-success">[[${user.typeAccount.name()}]]</h7></h6>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-lg-4 col-sm-12 p-1">
+            <div class="card rounded border-danger">
+                <h5 class="card-title bg-light text-danger">Abonnement mensuel <span class="badge text-danger">VIP</span>
+                    <button class="badge text-danger" >10 000 FCFA</button></h5>
+                <div class="card-body">
+                    <p class="card-text">Toutes vos annonces seront des <label class="text-info">annonces VIP</label> et s'afficheront
+                        en premier dans toutes les recherches.<br>
+                        Vos annonces VIP se renouvellent automatiquement chaque jour et donc seront toujours en tête de liste.<br>
+                        Une annonce est VIP pendant 5 jours avant de devenir une annonce classique.<br>
+                        Vous pouvez publier plusieurs annonces.
+                        Votre visibilité est assurée en tant que leader.
+                    </p>
+                    <form method="post" action="" th:action="@{/paiement_vip}">
+                        <button type="submit" class="btn btn btn-danger btn-sm">je m'abonne ici</button>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-12 p-1">
+            <div class="card rounded border-primary">
+                <h5 class="card-title bg-light text-primary">Abonnement mensuel<span class="badge text-primary">PREMIUM</span>
+                    <button class="badge text-primary" >7 500 FCFA</button></h5></h5>
+                <div class="card-body">
+                    <p class="card-text">Toutes vos annonces seront des <label class="text-info">annonces PREMIUM</label> et
+                        s'afficheront à la suite des annonces VIP.<br>
+                        Vos annonces PREMIUM se renouvellent automatiquement chaque 2 jours et donc seront toujours en tête de liste.<br>
+                        Une annonce porte le titre PREMIUM
+                        pendant 5 jours avant de devenir une annonce classique.<br>
+                        Vous pouvez publier plusieurs annonces.<br>
+
+                    </p>
+
+                    <form method="post" action="" th:action="@{/paiement_premium}">
+                        <button type="submit" class="btn btn btn-primary btn-sm">je m'abonne ici</button>
+                    </form>
+
+
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4 col-sm-12 p-1">
+            <div class="card rounded border-secondary">
+                <h5 class="card-title bg-light text-secondary">Abonnement mensuel<span class="badge text-secondary">STANDARD</span>
+                    <button class="badge text-secondary" >5 000 FCFA</button></h5></h5>
+                <div class="card-body">
+                    <p class="card-text">Avec un abonnement Standard, toutes vos annonces seront des <label class="text-info">annonces RELAXES </label>.
+                        <br>
+                        Vos annonces RELAXE se renouvellent automatiquement chaque 2 jours et se positionnent au dessus du reste des annonces classiques.<br>
+                        Une annonce est RELAXE pendant 5 jours avant de devenir une annonce classique.<br>
+                        Vous pouvez publier plusieurs annonces.
+
+                    </p>
+
+                    <form method="post" action="" th:action="@{/paiement_standard}">
+                        <button type="submit" class="btn btn btn-secondary btn-sm">je m'abonne ici</button>
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container alert-info">
+    <h6 class="alert-info m-1"> Certifies ton compte pour accroitre ta crédibilité.</h6>
+</div>
+
+<div class="container">
+
+    <h4 class="">Tu veux certifier ton compte ? écris nous en cliquant ici
+        <a class="btn btn-sm btn-primary" th:href="@{'https://wa.me/620198571/?text=DEMANDE CERTIFICATION-U'+${user.id}}"> je me certifie </a> <span style='font-size:20px;'>&#128521;</span> </h4>
+
+</div>
+
+
+
+
+<script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+
+<div th:insert="footer :: copy"></div>
+
+</body>
+</html>

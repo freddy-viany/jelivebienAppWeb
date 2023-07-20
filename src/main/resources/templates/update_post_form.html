@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="fr">
+<!-- <html xmlns:th="http://thymeleaf.org" lang="fr"> -->
+<head>
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta content="" name="keywords">
+    <meta content="" name="description">
+    <meta charset="utf-8">
+
+
+
+
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/css/bootstrap.min.css} "/>
+    <link th:rel="stylesheet" th:href="@{/webjars/bootstrap/5.1.3/js/bootstrap.bundle.min.js}">
+
+
+    <!-- Favicon -->
+    <link href="img/favicon.ico" rel="icon">
+    <title>jelivebien Update post, site de petites annonces gratuites sur le bien-être </title>
+
+
+
+</head>
+
+<body>
+
+<div th:insert="header :: copy-header"></div>
+
+<div class="container mt-5">
+    <form  th:action="@{/updatepost}" class="was-validated" method="post"
+          enctype="multipart/form-data" th:object="${post}">
+
+
+        <!-- hide the id to the user -->
+        <input type="hidden" th:field="*{postID}">
+        <input type="hidden" th:field="*{status}">
+        <input type="hidden" th:field="*{creationPostDateTime}">
+        <input type="hidden" th:field="*{expirePostDateTime}">
+        <input type="hidden" th:field="*{expireSponsoringPostDateTime}">
+
+        <div class="mb-3 mt-3">
+            <label for="titre_post" class="form-label">Title:</label>
+            <input type="text" class="form-control" id="titre_post" placeholder="Entrer le titre"
+                   name="titre_post" th:field="*{postTitle}" required>
+            <div class="valid-feedback">Valide.</div>
+            <div class="invalid-feedback">Veuillez remplir ce champ.</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="post_description" class="form-label">Description:</label>
+            <textarea class="form-control" id="post_description" name="post_description"
+                      placeholder="Decrivez votre announce" th:field="*{postDescription}" required></textarea>
+            <div class="valid-feedback">Valide.</div>
+            <div class="invalid-feedback">Veuillez remplir ce champ.</div>
+        </div>
+
+        <div class="mb-3">
+            <label for="post_phone" class="form-label">Tel (Entrer votre numero - whatsapp):</label>
+            <input type="tel" class="form-control" id="post_phone"  name="phone"
+                   placeholder="690690000" maxlength="9" pattern="[6]{1}[0-9]{8}"
+                   th:field="*{postPhoneNumber}" required>
+            <!--<input type="tel" class="form-control" id="post_phone"  name="phone"
+                   placeholder="690-690-000" pattern="[0-9]{3}-[0-9]{3}-[0-9]{3}"
+                   th:field="*{postPhoneNumber}" required>-->
+            <small>Format: 690690690</small><br><br>
+            <div class="valid-feedback">Valide.</div>
+            <div class="invalid-feedback">Veuillez remplir ce champ.</div>
+
+
+        </div>
+
+        <div class="mb-3">
+            <label for="post_city" class="form-label">Ville (Choisir une ville):</label >
+            <select class="form-select form-select-sm" th:field="*{postCity}" name="post_city" id="post_city" required>
+                <option th:each="city:${listPostCities}" th:value="${city}" th:text="${city}"></option>
+                <div class="valid-feedback">Valide.</div>
+                <div class="invalid-feedback">Veuillez remplir ce champ.</div>
+            </select>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label">Categorie (Choisir une categorie):</label>
+            <select class="form-select form-select-sm" th:field="*{postCategory}" required>
+                <option th:each="category:${listPostCategories}" th:value="${category}" th:text="${category}"></option>
+                <div class="valid-feedback">Valide.</div>
+                <div class="invalid-feedback">Veuillez remplir ce champ.</div>
+            </select>
+        </div>
+
+
+        <div class="card">
+            <div class="card-body" >
+                <h2 class="card-title">Ajouter une ou plusieurs images (facultatif)</h2>
+                <div class="mb-3">
+                        <input class="form-control" name="files" type="file"  multiple  id="files" accept="image/png, image/jpeg,image/jpg"><br />
+                </div>
+            </div>
+        </div>
+
+
+
+        <button type="submit" class="btn btn-warning" style="margin: 10px">Modifier</button>
+    </form>
+</div>
+
+
+
+
+
+<script th:src="@{/webjars/bootstrap/5.1.3/js/bootstrap.min.js}"></script>
+<div th:insert="footer :: copy"></div>
+</body>
+</html>
